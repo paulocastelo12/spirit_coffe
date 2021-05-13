@@ -10,7 +10,8 @@ class LoginModule extends Module {
   @override
   final List<Bind> binds = [
     Bind.lazySingleton((i) => LoginStore()),
-    Bind<ILoginRepository>((i) => LoginRepository(i.get<Dio>()))
+    Bind.lazySingleton<ILoginRepository>((i) => LoginRepository(i.get<Dio>()))
+    // Bind<ILoginRepository>((i) => LoginRepository(i.get<Dio>()))
   ];
 
   @override
