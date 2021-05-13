@@ -1,6 +1,14 @@
 # spirit_coffe
 
-A new Flutter project.
+{
+    "users":[
+        {
+            "id": 1,
+            "name": "Paulo Castelo",
+            "phone": "(92) 95555-5555"
+        }
+    ]
+}
 
 ## Getting Started
 
