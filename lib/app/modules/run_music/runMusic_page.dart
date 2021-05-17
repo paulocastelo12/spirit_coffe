@@ -15,6 +15,9 @@ class RunMusicPageState extends State<RunMusicPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text(""),
+      ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[Text("Run Audio Page")],

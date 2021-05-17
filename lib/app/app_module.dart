@@ -1,7 +1,7 @@
 
 import 'package:dio/dio.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:spirit_coffe/app/core/auth/auth_controller.dart';
+import 'package:spirit_coffe/app/core/auth/auth_store.dart';
 import 'package:spirit_coffe/app/modules/login/login_module.dart';
 import 'core/utils/constants.dart';
 import 'modules/home/home_module.dart';
@@ -9,7 +9,7 @@ import 'modules/home/home_module.dart';
 class AppModule extends Module {
   @override
   final List<Bind> binds = [
-    Bind((i) => AuthController()),
+    Bind((i) => AuthStore()),
     Bind((i) => Dio(BaseOptions(baseUrl: URL_BASE, connectTimeout: 30000))),
   ];
 

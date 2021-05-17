@@ -30,25 +30,21 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
                 return Column(
                   children: [
                     ListTile(
-                      onTap: () => Modular.to.pushNamed("/home/runaudio"),
+                      onTap: () => Modular.to.pushNamed("/home/run_music"),
                       leading: Icon(
                         Icons.play_arrow,
-                        size: 32,
+                        size: 42,
                         color: Colors.green[400],
                       ),
                       title: Text(
-                        "Café. Dia 12 de Maio 2021, Segunda-Feira",
-                        style: GoogleFonts.lato(fontSize: 14.5),
+                        "Dia 12 de Dezembro 2021, Segunda-Feira",
+                        style: GoogleFonts.lato(fontSize: 15.5),
                       ),
                       subtitle: Text(
                         "Autor: Ap. Canuto Couto",
-                        style: GoogleFonts.lato(fontSize: 12.5),
+                        style: GoogleFonts.lato(fontSize: 14.5),
                       ),
-                      trailing: Icon(
-                        Icons.share,
-                        size: 26,
-                        color: Colors.white,
-                      ),
+                    
                     ),
                     Divider()
                   ],

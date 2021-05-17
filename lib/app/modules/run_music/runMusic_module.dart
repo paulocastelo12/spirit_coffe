@@ -10,7 +10,6 @@ class RunMusicModule extends Module {
 
   @override
   final List<ModularRoute> routes = [
-    ChildRoute('/', child: (_, args) => RunMusicPage()),
-    ModuleRoute('/runaudio', module: RunMusicModule()),
+    ChildRoute('/', child: (_, args) => RunMusicPage())
   ];
 }

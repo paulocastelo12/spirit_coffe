@@ -11,7 +11,7 @@ class LoginRepository implements ILoginRepository {
 
     UserModel userModel; 
     try {
-      var response = await Dio().get('http://localhost:3000/users', queryParameters: data);
+      var response = await Dio().get('http://192.168.100.3:3000/users', queryParameters: data);
       print(response.data);
 
       userModel = UserModel(
