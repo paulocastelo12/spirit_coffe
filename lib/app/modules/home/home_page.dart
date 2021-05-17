@@ -32,25 +32,55 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
                     ListTile(
                       onTap: () => Modular.to.pushNamed("/home/run_music"),
                       leading: Icon(
-                        Icons.play_arrow,
+                        Icons.headset,
                         size: 42,
                         color: Colors.green[400],
                       ),
                       title: Text(
-                        "Dia 12 de Dezembro 2021, Segunda-Feira",
-                        style: GoogleFonts.lato(fontSize: 15.5),
+                        "12 de Dezembro 2021, Segunda-Feira",
+                        style: GoogleFonts.lato(fontSize: 16.5),
                       ),
                       subtitle: Text(
                         "Autor: Ap. Canuto Couto",
-                        style: GoogleFonts.lato(fontSize: 14.5),
+                        style: GoogleFonts.lato(fontSize: 16),
                       ),
-                    
                     ),
                     Divider()
                   ],
                 );
               },
             )),
+          ],
+        ),
+      ),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.grey[800],
+              ),
+              child: Text('Drawer Header'),
+            ),
+            ListTile(
+              title: Text('Item 1'),
+              onTap: () {
+                // Update the state of the app
+                // ...
+                // Then close the drawer
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: Text('Item 2'),
+              onTap: () {
+                // Update the state of the app
+                // ...
+                // Then close the drawer
+                Navigator.pop(context);
+              },
+            ),
           ],
         ),
       ),
