@@ -54,6 +54,21 @@ mixin _$LoginStore on _LoginStoreBase, Store {
     });
   }
 
+  final _$checkSaveAtom = Atom(name: '_LoginStoreBase.checkSave');
+
+  @override
+  bool get checkSave {
+    _$checkSaveAtom.reportRead();
+    return super.checkSave;
+  }
+
+  @override
+  set checkSave(bool value) {
+    _$checkSaveAtom.reportWrite(value, super.checkSave, () {
+      super.checkSave = value;
+    });
+  }
+
   final _$loginAsyncAction = AsyncAction('_LoginStoreBase.login');
 
   @override
@@ -61,12 +76,57 @@ mixin _$LoginStore on _LoginStoreBase, Store {
     return _$loginAsyncAction.run(() => super.login());
   }
 
+  final _$getStringValuesSFAsyncAction =
+      AsyncAction('_LoginStoreBase.getStringValuesSF');
+
+  @override
+  Future getStringValuesSF() {
+    return _$getStringValuesSFAsyncAction.run(() => super.getStringValuesSF());
+  }
+
+  final _$_LoginStoreBaseActionController =
+      ActionController(name: '_LoginStoreBase');
+
+  @override
+  dynamic setTextNomeUser(String value) {
+    final _$actionInfo = _$_LoginStoreBaseActionController.startAction(
+        name: '_LoginStoreBase.setTextNomeUser');
+    try {
+      return super.setTextNomeUser(value);
+    } finally {
+      _$_LoginStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic setTextNumberPhone(String value) {
+    final _$actionInfo = _$_LoginStoreBaseActionController.startAction(
+        name: '_LoginStoreBase.setTextNumberPhone');
+    try {
+      return super.setTextNumberPhone(value);
+    } finally {
+      _$_LoginStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic movimentcheck() {
+    final _$actionInfo = _$_LoginStoreBaseActionController.startAction(
+        name: '_LoginStoreBase.movimentcheck');
+    try {
+      return super.movimentcheck();
+    } finally {
+      _$_LoginStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
   @override
   String toString() {
     return '''
 loading: ${loading},
 nomeUser: ${nomeUser},
-numberPhone: ${numberPhone}
+numberPhone: ${numberPhone},
+checkSave: ${checkSave}
     ''';
   }
 }

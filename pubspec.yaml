@@ -33,10 +33,11 @@ dependencies:
   flutter_mobx: ^2.0.0
   build_runner: ^2.0.2
   google_fonts: ^2.0.0
-  mask_text_input_formatter: ^1.2.1
   dio: ^4.0.0
   bloc: 7.0.0-nullsafety.3
   flutter_bloc: 7.0.0-nullsafety.3
+  shared_preferences: ^2.0.5
+  flutter_masked_text: ^0.8.0
 
 dev_dependencies:
   bloc_test: 8.0.0-nullsafety.2

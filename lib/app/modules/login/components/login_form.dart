@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_masked_text/flutter_masked_text.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:spirit_coffe/app/modules/login/login_store.dart';
 
 class FormLogin extends StatefulWidget {
@@ -14,8 +15,8 @@ class _FormLoginState extends State<FormLogin> {
 
   final _formKey = GlobalKey<FormState>();
 
-  var maskFormatter = new MaskTextInputFormatter(
-      mask: '(##) #####-####', filter: {"#": RegExp(r'[0-9]')});
+  MaskedTextController maskedTextController =
+      MaskedTextController(mask: '(00) 00000-0000');
 
   @override
   Widget build(BuildContext context) {
@@ -26,44 +27,89 @@ class _FormLoginState extends State<FormLogin> {
               key: _formKey,
               child: Column(
                 children: [
-                  TextFormField(
-                    decoration: InputDecoration(
-                      labelText: "NOME COMPLETO",
-                      border: OutlineInputBorder(),
-                      contentPadding: new EdgeInsets.symmetric(
-                          vertical: 16.0, horizontal: 10.0),
-                    ),
-                    style: GoogleFonts.poppins(fontSize: 18),
-                    validator: (value) {
-                      if (value.isEmpty) return "O campo é obrigatório";
-                      return null;
-                    },
-                   onSaved: (value) => _loginStore.nomeUser = value,
-                  ),
+                  Observer(builder: (_) {
+                    var textEditingControllerName =
+                        TextEditingController(text: _loginStore.nomeUser);
+
+                    textEditingControllerName.selection =
+                        TextSelection.fromPosition(TextPosition(
+                            offset: textEditingControllerName.text.length));
+
+                    return TextFormField(
+                      controller: textEditingControllerName,
+                      cursorColor: Colors.green,
+                      decoration: InputDecoration(
+                        labelText: "NOME COMPLETO",
+                        border: OutlineInputBorder(),
+                        contentPadding: new EdgeInsets.symmetric(
+                            vertical: 16.0, horizontal: 10.0),
+                      ),
+                      style: GoogleFonts.poppins(fontSize: 18),
+                      onChanged: _loginStore.setTextNomeUser,
+                      validator: (value) {
+                        if (value.isEmpty) return "O campo é obrigatório";
+                        return null;
+                      },
+                      onSaved: (value) => _loginStore.nomeUser = value,
+                    );
+                  }),
                   SizedBox(
                     height: 24,
                   ),
-                  TextFormField(
-                    inputFormatters: [maskFormatter],
-                    keyboardType: TextInputType.number,
-                    decoration: InputDecoration(
-                      labelText: "NÚMERO CELULAR",
-                      border: OutlineInputBorder(),
-                      contentPadding: new EdgeInsets.symmetric(
-                          vertical: 16.0, horizontal: 10.0),
-                    ),
-                    style: GoogleFonts.poppins(fontSize: 18),
-                    validator: (value) {
-                      if (value.isEmpty) return "O campo é obrigatório";
-                      return null;
-                    },
-                    onSaved: (value) => _loginStore.numberPhone = value,
+                  Observer(builder: (_) {
+                    maskedTextController.text = _loginStore.numberPhone;
+                    TextEditingController textEditingControllerWithMask =
+                        TextEditingController(text: maskedTextController.text);
+                    textEditingControllerWithMask.selection =
+                        TextSelection.fromPosition(TextPosition(
+                            offset: maskedTextController.text.length));
+
+                    return TextFormField(
+                      controller: textEditingControllerWithMask,
+                      keyboardType: TextInputType.number,
+                      cursorColor: Colors.green,
+                      decoration: InputDecoration(
+                        labelText: "NÚMERO CELULAR",
+                        border: OutlineInputBorder(),
+                        contentPadding: new EdgeInsets.symmetric(
+                            vertical: 16.0, horizontal: 10.0),
+                      ),
+                      style: GoogleFonts.poppins(fontSize: 18),
+                      onChanged: _loginStore.setTextNumberPhone,
+                      validator: (value) {
+                        if (value.isEmpty) return "O campo é obrigatório";
+                        return null;
+                      },
+                      onSaved: (value) => _loginStore.numberPhone = value,
+                    );
+                  }),
+                  SizedBox(
+                    height: 12,
                   ),
+                  Observer(builder: (_) {
+                    return Row(
+                      children: [
+                        Checkbox(
+                          checkColor: Colors.white, // color of tick Mark
+                          activeColor: Colors.green,
+                          value: _loginStore.checkSave,
+                          onChanged: (value) {
+                            _loginStore.movimentcheck();
+                          },
+                        ),
+                        Text(
+                          'Manter-me conctado',
+                          style: GoogleFonts.poppins(
+                              fontSize: 16, letterSpacing: .5),
+                        ),
+                      ],
+                    );
+                  })
                 ],
               )),
         ),
         SizedBox(
-          height: 48,
+          height: 24,
         ),
         GestureDetector(
           onTap: () {

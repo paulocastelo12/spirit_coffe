@@ -8,18 +8,16 @@ class LoginRepository implements ILoginRepository {
 
   @override
   Future<UserModel> login(Map<String, dynamic> data) async {
-
-    UserModel userModel; 
+    UserModel userModel;
     try {
-      var response = await Dio().get('http://192.168.100.3:3000/users', queryParameters: data);
+      var response = await Dio()
+          .get('http://147.1.5.121:3000/users', queryParameters: data);
       print(response.data);
 
       userModel = UserModel(
-        id: response.data[0]['id'],
-        name: response.data[0]['name'],
-        phone: response.data[0]['phone']
-      );
-
+          id: response.data[0]['id'],
+          name: response.data[0]['name'],
+          phone: response.data[0]['phone']);
     } catch (e) {
       print(e);
     }

@@ -20,50 +20,76 @@ class LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: [
-          Container(
-            margin: EdgeInsets.only(left: 32, right: 32, top: 80),
-            child: Column(
-              children: <Widget>[
-                Center(
-                  child: Container(
-                    child: Text(
-                      "Coffe Spirit",
-                      style: GoogleFonts.poppins(
-                          fontSize: 24,
-                          fontWeight: FontWeight.w600,
-                          letterSpacing: .5),
+      body: SingleChildScrollView(
+        child: Stack(
+          children: [
+            Container(
+              margin: EdgeInsets.only(left: 32, right: 32, top: 80),
+              child: Column(
+                children: <Widget>[
+                  Center(
+                    child: Container(
+                      child: Icon(Icons.local_cafe, size: 72),
                     ),
                   ),
-                ),
-                SizedBox(
-                  height: 8,
-                ),
-                Center(
-                  child: Container(
-                    child: Text(
-                      "Preencha os campos para continuar...",
-                      style: GoogleFonts.poppins(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w600,
-                          letterSpacing: .5),
-                      textAlign: TextAlign.center,
+                  SizedBox(
+                    height: 8,
+                  ),
+                  Center(
+                    child: Container(
+                      child: Text(
+                        "Café Espiritual",
+                        style: GoogleFonts.poppins(
+                            fontSize: 24,
+                            fontWeight: FontWeight.w600,
+                            letterSpacing: .5),
+                      ),
                     ),
                   ),
-                ),
-                SizedBox(
-                  height: 48,
-                ),
-                FormLogin()
-              ],
+                  SizedBox(
+                    height: 8,
+                  ),
+                  Center(
+                    child: Container(
+                      child: Text(
+                        "Preencha os campos para continuar...",
+                        style: GoogleFonts.poppins(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w600,
+                            letterSpacing: .5),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 28,
+                  ),
+                  FormLogin()
+                ],
+              ),
             ),
-          ),
-          Observer(builder: (_) {
-            return store.loading
-                  ? LoadingComponent() : Container();
-          })
-        ],
+            Observer(builder: (_) {
+              return store.loading ? LoadingComponent() : Container();
+            }),
+            Container(
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text("Versão 1.0.0 (Beta)",
+                        style: GoogleFonts.poppins(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600,
+                            letterSpacing: .5)),
+                  )
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
