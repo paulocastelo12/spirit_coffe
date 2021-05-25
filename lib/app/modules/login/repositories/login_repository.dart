@@ -10,8 +10,15 @@ class LoginRepository implements ILoginRepository {
   Future<UserModel> login(Map<String, dynamic> data) async {
     UserModel userModel;
     try {
-      var response = await Dio()
-          .get('http://147.1.5.121:3000/users', queryParameters: data);
+
+       FormData formData = FormData.fromMap(
+          {"name": 'Julyane K. Castelo', "phone": '92981261466'});
+
+        var response = await dio.get(
+        "http://192.168.100.3:3000/users",
+      );
+
+
       print(response.data);
 
       userModel = UserModel(
