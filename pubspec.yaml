@@ -38,6 +38,8 @@ dependencies:
   flutter_bloc: 7.0.0-nullsafety.3
   shared_preferences: ^2.0.5
   flutter_masked_text: ^0.8.0
+  intl: ^0.17.0
+  gson: ^0.1.4
 
 dev_dependencies:
   bloc_test: 8.0.0-nullsafety.2

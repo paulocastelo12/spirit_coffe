@@ -64,7 +64,22 @@ class LoginPageState extends State<LoginPage> {
                   SizedBox(
                     height: 28,
                   ),
-                  FormLogin()
+                  FormLogin(),
+                  SizedBox(
+                    height: 28,
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Modular.to.pushNamed('/newuser');
+                    },
+                    child: Text(
+                      "Criar novo usuário",
+                      style: GoogleFonts.poppins(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                          letterSpacing: .5),
+                    ),
+                  )
                 ],
               ),
             ),

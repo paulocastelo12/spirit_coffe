@@ -1,1 +1,1 @@
-const String URL_BASE = "https://api1.amazongas.com.br/API-GATEWAY/Mobile/Modulo-AppEntregador/index.php";
+const String URL_BASE = "http://147.1.5.121:3000";

@@ -10,16 +10,15 @@ class LoginRepository implements ILoginRepository {
   Future<UserModel> login(Map<String, dynamic> data) async {
     UserModel userModel;
     try {
+      FormData formData =
+          FormData.fromMap({"name": 'Paulo Castelo', "phone": '92981261466'});
 
-       FormData formData = FormData.fromMap(
-          {"name": 'Julyane K. Castelo', "phone": '92981261466'});
+      print(formData);
 
-        var response = await dio.get(
-        "http://192.168.100.3:3000/users",
-      );
+      var response = await dio.post("/login",
+          data: {"name": 'Paulo Castelo', "phone": '92981261466'});
 
-
-      print(response.data);
+      print(response.data.toString());
 
       userModel = UserModel(
           id: response.data[0]['id'],
@@ -30,5 +29,12 @@ class LoginRepository implements ILoginRepository {
     }
 
     return userModel;
+  }
+
+  @override
+  Future<void> findAll() async {
+    var response = await dio.get("/users");
+
+    print("Users => " + response.data.toString());
   }
 }

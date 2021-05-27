@@ -4,6 +4,7 @@ import 'package:spirit_coffe/app/modules/login/login_store.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:spirit_coffe/app/modules/login/repositories/login_repository.dart';
 
+import 'newuser/newuser_module.dart';
 import 'repositories/login_repository_interface.dart';
 
 class LoginModule extends Module {
@@ -17,5 +18,6 @@ class LoginModule extends Module {
   @override
   final List<ModularRoute> routes = [
     ChildRoute('/', child: (_, args) => LoginPage()),
+    ModuleRoute('/newuser', module: NewuserModule()),
   ];
 }

@@ -12,6 +12,7 @@ class LoginStore = _LoginStoreBase with _$LoginStore;
 
 abstract class _LoginStoreBase with Store {
   _LoginStoreBase() {
+    findAllUsers();
     getStringValuesSF();
   }
 
@@ -36,6 +37,10 @@ abstract class _LoginStoreBase with Store {
   bool checkSave = true;
 
   UserModel userModel;
+
+  findAllUsers() async {
+    await loginRepository.findAll();
+  }
 
   @action
   login() async {

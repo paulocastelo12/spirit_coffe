@@ -1,3 +1,4 @@
+import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -10,7 +11,10 @@ class AppModule extends Module {
   @override
   final List<Bind> binds = [
     Bind((i) => AuthStore()),
-    Bind((i) => Dio(BaseOptions(baseUrl: URL_BASE, connectTimeout: 30000))),
+    Bind((i) =>
+        Dio(BaseOptions(baseUrl: URL_BASE, connectTimeout: 30000, headers: {
+          HttpHeaders.contentTypeHeader: "application/json",
+        }))),
   ];
 
   @override
