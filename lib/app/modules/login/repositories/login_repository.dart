@@ -8,27 +8,16 @@ class LoginRepository implements ILoginRepository {
 
   @override
   Future<UserModel> login(Map<String, dynamic> data) async {
-    UserModel userModel;
     try {
-      FormData formData =
-          FormData.fromMap({"name": 'Paulo Castelo', "phone": '92981261466'});
-
-      print(formData);
-
-      var response = await dio.post("/login",
-          data: {"name": 'Paulo Castelo', "phone": '92981261466'});
+      var response = await dio.post("/login", data: data);
 
       print(response.data.toString());
-
-      userModel = UserModel(
-          id: response.data[0]['id'],
-          name: response.data[0]['name'],
-          phone: response.data[0]['phone']);
+      return UserModel.fromJson(response.data);
     } catch (e) {
       print(e);
-    }
 
-    return userModel;
+      return null;
+    }
   }
 
   @override

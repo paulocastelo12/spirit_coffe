@@ -15,8 +15,11 @@ class _FormLoginState extends State<FormLogin> {
 
   final _formKey = GlobalKey<FormState>();
 
-  MaskedTextController maskedTextController =
+  MaskedTextController maskedTextControllerPhone =
       MaskedTextController(mask: '(00) 00000-0000');
+
+  MaskedTextController maskedTextControllerDate =
+      MaskedTextController(mask: '00/00/0000');
 
   @override
   Widget build(BuildContext context) {
@@ -28,41 +31,15 @@ class _FormLoginState extends State<FormLogin> {
               child: Column(
                 children: [
                   Observer(builder: (_) {
-                    var textEditingControllerName =
-                        TextEditingController(text: _loginStore.nomeUser);
+                    maskedTextControllerPhone.text = _loginStore.numberPhone;
 
-                    textEditingControllerName.selection =
-                        TextSelection.fromPosition(TextPosition(
-                            offset: textEditingControllerName.text.length));
-
-                    return TextFormField(
-                      controller: textEditingControllerName,
-                      cursorColor: Colors.green,
-                      decoration: InputDecoration(
-                        labelText: "NOME COMPLETO",
-                        border: OutlineInputBorder(),
-                        contentPadding: new EdgeInsets.symmetric(
-                            vertical: 16.0, horizontal: 10.0),
-                      ),
-                      style: GoogleFonts.poppins(fontSize: 18),
-                      onChanged: _loginStore.setTextNomeUser,
-                      validator: (value) {
-                        if (value.isEmpty) return "O campo é obrigatório";
-                        return null;
-                      },
-                      onSaved: (value) => _loginStore.nomeUser = value,
-                    );
-                  }),
-                  SizedBox(
-                    height: 24,
-                  ),
-                  Observer(builder: (_) {
-                    maskedTextController.text = _loginStore.numberPhone;
                     TextEditingController textEditingControllerWithMask =
-                        TextEditingController(text: maskedTextController.text);
+                        TextEditingController(
+                            text: maskedTextControllerPhone.text);
+
                     textEditingControllerWithMask.selection =
                         TextSelection.fromPosition(TextPosition(
-                            offset: maskedTextController.text.length));
+                            offset: maskedTextControllerPhone.text.length));
 
                     return TextFormField(
                       controller: textEditingControllerWithMask,
@@ -81,6 +58,38 @@ class _FormLoginState extends State<FormLogin> {
                         return null;
                       },
                       onSaved: (value) => _loginStore.numberPhone = value,
+                    );
+                  }),
+                  SizedBox(
+                    height: 24,
+                  ),
+                  Observer(builder: (_) {
+                    maskedTextControllerDate.text = _loginStore.datebirthday;
+
+                    var textEditingControllerName = TextEditingController(
+                        text: maskedTextControllerDate.text);
+
+                    textEditingControllerName.selection =
+                        TextSelection.fromPosition(TextPosition(
+                            offset: textEditingControllerName.text.length));
+
+                    return TextFormField(
+                      controller: textEditingControllerName,
+                      cursorColor: Colors.green,
+                      keyboardType: TextInputType.datetime,
+                      decoration: InputDecoration(
+                        labelText: "DATA NASCIMENTO",
+                        border: OutlineInputBorder(),
+                        contentPadding: new EdgeInsets.symmetric(
+                            vertical: 16.0, horizontal: 10.0),
+                      ),
+                      style: GoogleFonts.poppins(fontSize: 18),
+                      onChanged: _loginStore.setTextDateBirthday,
+                      validator: (value) {
+                        if (value.isEmpty) return "O campo é obrigatório";
+                        return null;
+                      },
+                      onSaved: (value) => _loginStore.datebirthday = value,
                     );
                   }),
                   SizedBox(

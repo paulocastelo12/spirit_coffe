@@ -11,14 +11,13 @@ class NewUserRepository implements INewUserRepository {
   Future<UserModel> createuser(Map<String, dynamic> data) async {
     try {
       var response = await dio.post("/users", data: data);
-
       print(response.data.toString());
-      // json.encode(data);
-      // print(data);
+      return UserModel.fromJson(response.data);
     } catch (e) {
       print("Erro  => " + e.toString());
+      return null;
     }
 
-    return null;
+    
   }
 }

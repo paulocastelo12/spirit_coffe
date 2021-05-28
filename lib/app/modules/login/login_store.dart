@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:intl/intl.dart';
 import 'package:mobx/mobx.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:spirit_coffe/app/core/models/user_model.dart';
@@ -12,7 +13,7 @@ class LoginStore = _LoginStoreBase with _$LoginStore;
 
 abstract class _LoginStoreBase with Store {
   _LoginStoreBase() {
-    findAllUsers();
+    //findAllUsers();
     getStringValuesSF();
   }
 
@@ -22,10 +23,10 @@ abstract class _LoginStoreBase with Store {
   bool loading = false;
 
   @observable
-  String nomeUser = "";
+  String datebirthday = "";
 
   @action
-  setTextNomeUser(String value) => nomeUser = value;
+  setTextDateBirthday(String value) => datebirthday = value;
 
   @observable
   String numberPhone = "";
@@ -49,8 +50,20 @@ abstract class _LoginStoreBase with Store {
     await Future.delayed(const Duration(milliseconds: 1000));
     //print(this.nomeUser + " " + this.numberPhone);
 
-    userModel = await loginRepository
-        .login({"nomeUser": "$nomeUser", "numberPhone": "$numberPhone"});
+    var inputFormat = DateFormat("dd/MM/yyyy");
+    var date = inputFormat.parse("$datebirthday");
+
+    String formatPhone = numberPhone.replaceAll(' ', '');
+    formatPhone = formatPhone.replaceAll('(', '');
+    formatPhone = formatPhone.replaceAll(')', '');
+    formatPhone = formatPhone.replaceAll('-', '');
+
+    Map<String, dynamic> data = {
+      "phone": formatPhone,
+      "datebirthday": date.toIso8601String()
+    };
+
+    userModel = await loginRepository.login(data);
 
     if (userModel != null) {
       this.checkSave ? await saveSharedPref() : await removeSharedPref();
@@ -67,7 +80,7 @@ abstract class _LoginStoreBase with Store {
 
   saveSharedPref() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString('name', nomeUser);
+    prefs.setString('datebirthday', datebirthday);
     prefs.setString('numberPhone', numberPhone);
   }
 
@@ -81,11 +94,11 @@ abstract class _LoginStoreBase with Store {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     //Return String
     String nameValueSF = "";
-    prefs.getString('name') == null
+    prefs.getString('datebirthday') == null
         ? nameValueSF = ""
-        : nameValueSF = prefs.getString('name');
+        : nameValueSF = prefs.getString('datebirthday');
 
-    nomeUser = nameValueSF;
+    datebirthday = nameValueSF;
 
     String numberPhoneValueSF = "";
     prefs.getString('numberPhone') == null

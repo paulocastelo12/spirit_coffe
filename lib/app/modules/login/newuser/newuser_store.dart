@@ -1,6 +1,7 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:intl/intl.dart';
 import 'package:mobx/mobx.dart';
+import 'package:spirit_coffe/app/core/models/user_model.dart';
 import 'package:spirit_coffe/app/modules/login/newuser/repositories/newuser_repository_interface.dart';
 
 part 'newuser_store.g.dart';
@@ -43,6 +44,10 @@ abstract class _NewuserStoreBase with Store {
       "gender": gender == SingingCharacter.masculine ? 'M' : 'F'
     };
 
-    await _iNewUserRepository.createuser(data);
+    UserModel userModel = await _iNewUserRepository.createuser(data);
+    
+    if(userModel != null){
+      Modular.to.pop();
+    }
   }
 }

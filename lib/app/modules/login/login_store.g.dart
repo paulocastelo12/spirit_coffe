@@ -24,18 +24,18 @@ mixin _$LoginStore on _LoginStoreBase, Store {
     });
   }
 
-  final _$nomeUserAtom = Atom(name: '_LoginStoreBase.nomeUser');
+  final _$datebirthdayAtom = Atom(name: '_LoginStoreBase.datebirthday');
 
   @override
-  String get nomeUser {
-    _$nomeUserAtom.reportRead();
-    return super.nomeUser;
+  String get datebirthday {
+    _$datebirthdayAtom.reportRead();
+    return super.datebirthday;
   }
 
   @override
-  set nomeUser(String value) {
-    _$nomeUserAtom.reportWrite(value, super.nomeUser, () {
-      super.nomeUser = value;
+  set datebirthday(String value) {
+    _$datebirthdayAtom.reportWrite(value, super.datebirthday, () {
+      super.datebirthday = value;
     });
   }
 
@@ -88,11 +88,11 @@ mixin _$LoginStore on _LoginStoreBase, Store {
       ActionController(name: '_LoginStoreBase');
 
   @override
-  dynamic setTextNomeUser(String value) {
+  dynamic setTextDateBirthday(String value) {
     final _$actionInfo = _$_LoginStoreBaseActionController.startAction(
-        name: '_LoginStoreBase.setTextNomeUser');
+        name: '_LoginStoreBase.setTextDateBirthday');
     try {
-      return super.setTextNomeUser(value);
+      return super.setTextDateBirthday(value);
     } finally {
       _$_LoginStoreBaseActionController.endAction(_$actionInfo);
     }
@@ -124,7 +124,7 @@ mixin _$LoginStore on _LoginStoreBase, Store {
   String toString() {
     return '''
 loading: ${loading},
-nomeUser: ${nomeUser},
+datebirthday: ${datebirthday},
 numberPhone: ${numberPhone},
 checkSave: ${checkSave}
     ''';
