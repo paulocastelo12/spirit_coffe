@@ -13,8 +13,12 @@ class LoginRepository implements ILoginRepository {
 
       print(response.data.toString());
       return UserModel.fromJson(response.data);
-    } catch (e) {
-      print(e);
+    } on DioError catch (e) {
+      if (e.response.data) {
+        print(e.response.data['error']);
+      } else {
+        print(e.error);
+      }
 
       return null;
     }

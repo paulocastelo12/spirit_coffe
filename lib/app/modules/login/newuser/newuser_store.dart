@@ -14,6 +14,9 @@ INewUserRepository _iNewUserRepository = Modular.get();
 
 abstract class _NewuserStoreBase with Store {
   @observable
+  bool loading = false;
+
+  @observable
   String name;
 
   @observable
@@ -28,7 +31,12 @@ abstract class _NewuserStoreBase with Store {
   @action
   setGender(SingingCharacter value) => gender = value;
 
+  @action
   Future<void> savenewuser() async {
+    loading = true;
+
+    await Future.delayed(const Duration(milliseconds: 1000));
+
     var inputFormat = DateFormat("dd/MM/yyyy");
     var date = inputFormat.parse("$datebirthday");
 
@@ -45,9 +53,11 @@ abstract class _NewuserStoreBase with Store {
     };
 
     UserModel userModel = await _iNewUserRepository.createuser(data);
-    
-    if(userModel != null){
+
+    if (userModel != null) {
       Modular.to.pop();
     }
+
+    loading = false;
   }
 }

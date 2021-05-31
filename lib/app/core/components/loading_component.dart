@@ -1,9 +1,20 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class LoadingComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    List<String> sentences = [
+      "Estamos quase lá",
+      "Falta pouco",
+      "Se alcama-me",
+      "Não vamos demorar"
+    ];
+
+    final _random = new Random();
+
     return Container(
       height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,
@@ -26,7 +37,7 @@ class LoadingComponent extends StatelessWidget {
             height: 12,
           ),
           Text(
-            "Estamos quase lá...",
+            "${sentences[_random.nextInt(sentences.length)]}...",
             textAlign: TextAlign.center,
             style: GoogleFonts.poppins(
                 fontSize: 14,
